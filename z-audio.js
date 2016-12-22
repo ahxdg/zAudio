@@ -7,33 +7,38 @@
 
 window.onload = function(){
 
-	//var au = $('body').find('audio[data-audio="z-audio"]');
 	var au = document.getElementsByTagName('audio'),
 		auArray = [];
+
+	/* Filter out plugins useing audio */
 	for (var i = 0; i < au.length; i++) {
 		if (au[i].attributes['data-audio'].value == 'z-audio') {
 			auArray.push(au[i]);
 		}
 	}
+
+	/* call function */
 	for(var i = 0; i < auArray.length; i++){
 		var src = auArray[i].attributes['src'].value;
 		zAudio.call(auArray[i]);
 	}
 
+	/* define function */
 	function zAudio(){
 		var _this = this,
-			src = _this.attributes['src'].value;
-		
+			src = _this.attributes['src'].value;	
 		
 		_this.appear = function(){
 			/* add audio controls used to display nodes.*/
 			_this.setAttribute('controls','controls');
 
-			var audioStyle = _this.attributes['data-style'] ? _this.attributes['data-style'].value : 'default';
+			/* Initialization nodes */
 			var audioBox = document.createElement('div');
 
 			/* Detemine whether the node has src attributes,if not and give a response prompt. */
 			if (src) { 
+				/* Initialization nodes/audioStyle */
+				var audioStyle = _this.attributes['data-style'] ? _this.attributes['data-style'].value : 'default';
 				var button = document.createElement('span');
 				var timeLine = document.createElement('div');
 				var overLine = document.createElement('span');
@@ -61,15 +66,19 @@ window.onload = function(){
 				timeLine.style.width = audioBox.offsetWidth - button.offsetWidth - audioTime.offsetWidth - 70 + 'px';
 				timeLine.style.left = button.offsetWidth + 36 + 'px';
 
+				/* set circle audio */
 				if (audioStyle == 'circle') {
 					button.style.lineHeight = audioBox.offsetHeight + 'px';
 					button.style.fontSize = audioBox.offsetHeight/4 + 'px';
+					var audioCover = audio.getAttribute('data-cover');
+					if (audioCover) {
+						audioBox.style.backgroundImage = 'url('+audioCover+')';
+					}
 				}
 
 				/* Set timer to get audio length, */
 				var duration,seter;
 				var s = setInterval(function(){
-					console.log(audio)
 					if (isNaN(audio.duration)) {
 						return false;
 					}else{
@@ -80,7 +89,7 @@ window.onload = function(){
 						removeCla(button,'disabled');
 						removeCla(audioTime,'z-load');
 					}
-				},1000);
+				},200);
 
 				/* bind event */
 				bindEvent(button,'click',function(){
@@ -91,7 +100,6 @@ window.onload = function(){
 						audio.play();
 						removeCla(button,'z-play');
 						addCla(button,'z-stop');
-						console.log(document.getElementsByTagName('audio'));
 						var allAudio = document.getElementsByTagName('audio');
 						for (var i = 0; i < allAudio.length; i++) {
 							allAudio[i].setAttribute('data-playStatus','false');
@@ -101,18 +109,19 @@ window.onload = function(){
 						seter = setInterval(function(){
 							audioTime.innerHTML = formatTime(duration- audio.currentTime);
 							overLine.style.width = (audio.currentTime/duration) * 100 + '%';
+
+							/* audio play end, clear interval. */
 							if (duration - audio.currentTime <= 0 || audio.getAttribute('data-playStatus') == 'false') {
 								clearInterval(seter);
 								removeCla(button,'z-stop');
 								addCla(button,'z-play');
 								audio.pause();
 							}
-							console.log(duration- audio.currentTime)
 						},100);
 
 					}else if(hasCla(button,'z-stop')){
 
-						/* clear interval. */
+						/* stop play, clear interval. */
 						clearInterval(seter);
 
 						audio.pause();
@@ -123,6 +132,7 @@ window.onload = function(){
 					}
 				});
 			}else{
+				/* not find audio src,show tips. */
 				var tips = document.createElement('p');
 				tips.setAttribute('class','error-tips')
 				tips.innerHTML = 'this audio not have src.';
@@ -137,6 +147,7 @@ window.onload = function(){
 		_this.appear();
 	}
 	
+	/* audio currentTime format. */
 	function formatTime(time){
 		time = Math.ceil(time);
 		var h = Math.floor(time/3600);
@@ -156,6 +167,7 @@ window.onload = function(){
 		}
 		return time;
 	}
+	/* bind function use */
 	function removeCla(obj,cla){
 		var _cla = obj.getAttribute('class');
 		_cla = _cla.replace(cla,'');
