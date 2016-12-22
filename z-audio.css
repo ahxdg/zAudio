@@ -1,0 +1,193 @@
+
+/**
+ *	author:   togor
+ *	time:     2016-12-21
+ *	describe: zAudio plug style
+ **/
+
+
+.zAudio{
+	height: 50px;
+	width: 100%;
+	background-color: rgb(54,23,18);
+	border-radius: 50px;
+	position: relative;
+}
+.zAudio .zAudio-button{
+	font-family:"iconfont" !important;
+	font-size:20px;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #fff;
+	line-height: 50px;
+	margin-left: 20px;
+	cursor: pointer;
+}
+.zAudio audio{
+	display: none;
+	height: 1;
+	width: 1;
+}
+.zAudio .timeLine{
+	height: 3px;
+	background-color: #fff;
+	position: absolute;
+	top:23px;
+	border-radius: 3px;
+	z-index: 2;
+}
+.zAudio .overLine{
+	height: 100%;
+	width: 0;
+	position: relative;
+	background-color: #aaa;
+	display: block;
+}
+.zAudio .overLine .point{
+	display: block;
+	position: absolute;
+	z-index: 3;
+	width: 12px;
+	height: 12px;
+	background-color: #fff;
+	border-radius: 50%;
+	top:-5px;
+	right: -5px;
+	cursor: pointer;
+}
+.zAudio .audioTime{
+	color: #fff;
+	display: block;
+	position: absolute;
+	top:0;
+	line-height: 50px;
+	right: 20px;
+	width: 40px;
+}
+.zAudio .z-load{
+	font-family:"iconfont" !important;
+	font-size:18px;
+	line-height: 40px;
+	width: 40px;
+	height: 40;
+	font-style:normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #fff;
+	margin-left: 20px;
+	top:5px;
+	text-align: center;
+	animation: load 2s infinite;
+	-webkit-animation: load 2s infinite;
+	-o-animation: load 2s infinite;
+	-moz-animation: load 2s infinite;
+}
+@keyframes load{
+	0%{
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+	}
+	99%{
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+	}
+	100%{
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes load{
+	0%{
+		transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+	}
+	99%{
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+	}
+	100%{
+		transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+	}
+}
+@-moz-keyframes load{
+	0%{
+		transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+	}
+	99%{
+		transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+	}
+	100%{
+		transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+	}
+}
+@-o-keyframes load{
+	0%{
+		transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+	}
+	99%{
+		transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+	}
+	100%{
+		transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+	}
+}
+
+
+.zAudio.zAudio-circle{
+	width:100%;
+	height: 100%;
+	text-align: center;
+	background-image: url(./logo.jpg);
+	background-size: 100% 100%;
+	box-shadow: 0 0 1px #999;
+}
+.zAudio.zAudio-circle:after{
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2;
+	position: absolute;
+	top:0;
+	left: 0;
+}
+.zAudio.zAudio-circle .timeLine,.zAudio.zAudio-circle .audioTime{
+	display: none;
+}
+.zAudio.zAudio-circle .zAudio-button{
+	margin-left: 0;
+	position: relative;
+	z-index: 3;
+}
+
+
+/* iconfont */
+
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1482387228168'); /* IE9*/
+  src: url('iconfont.eot?t=1482387228168#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1482387228168') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1482387228168') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1482387228168#iconfont') format('svg'); /* iOS 4.1- */
+}
+.z-play:before { content: "\e635"; }
+
+.z-stop:before { content: "\e773"; }
+
+.z-load:before { content: "\e6a4"; }
